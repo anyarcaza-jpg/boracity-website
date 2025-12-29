@@ -1,4 +1,11 @@
 // ============================================
+// IMPORTS
+// ============================================
+import { MESSAGES, DOWNLOAD_LIMITS } from './utils/constants.js';
+import { showNotification, smoothScrollTo } from './utils/helpers.js';
+import { createFamilyCard, toggleFavorite, handleDownload } from './components/familyCard.js';
+
+// ============================================
 // MOCK DATA - Familias de ejemplo
 // ============================================
 const mockFamilies = [
@@ -104,7 +111,7 @@ const mockFamilies = [
 // ESTADO GLOBAL
 // ============================================
 let currentFilter = 'all';
-let downloadsRemaining = 3;
+let downloadsRemaining = DOWNLOAD_LIMITS.free;
 let favorites = [];
 
 // ============================================
@@ -113,95 +120,48 @@ let favorites = [];
 function renderFamilies(filter = 'all') {
     const grid = document.getElementById('familiesGrid');
     
-    // Filtrar familias
     const filteredFamilies = filter === 'all' 
         ? mockFamilies 
         : mockFamilies.filter(f => f.category === filter);
     
-    // Limpiar grid
     grid.innerHTML = '';
     
-    // Crear tarjetas
     filteredFamilies.forEach(family => {
-        const card = createFamilyCard(family);
+        const card = createFamilyCard(family, favorites, downloadsRemaining);
         grid.appendChild(card);
     });
+    
+    attachCardEventListeners();
 }
 
 // ============================================
-// CREAR TARJETA DE FAMILIA
+// ADJUNTAR EVENT LISTENERS A LAS TARJETAS
 // ============================================
-function createFamilyCard(family) {
-    const card = document.createElement('div');
-    card.className = 'family-card';
-    card.dataset.id = family.id;
+function attachCardEventListeners() {
+    // Favoritos
+    document.querySelectorAll('.family-favorite').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const familyId = parseInt(btn.dataset.familyId);
+            toggleFavorite(familyId, favorites);
+            renderFamilies(currentFilter);
+        });
+    });
     
-    const isFavorite = favorites.includes(family.id);
-    
-    card.innerHTML = `
-        <div class="family-image">
-            <img src="${family.image}" alt="${family.name}">
-            <div class="family-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavorite(${family.id})">
-                <i class="fas fa-heart"></i>
-            </div>
-        </div>
-        <div class="family-info">
-            <h3 class="family-name">${family.name}</h3>
-            <span class="family-category">${capitalizeFirst(family.category)}</span>
-            <p class="family-downloads">
-                <i class="fas fa-download"></i> ${family.downloads.toLocaleString()} downloads
-            </p>
-            <button class="family-download-btn" onclick="downloadFamily(${family.id})" ${downloadsRemaining === 0 && !family.isPremium ? 'disabled' : ''}>
-                ${downloadsRemaining === 0 && !family.isPremium ? 'Upgrade to Download' : 'Download'}
-            </button>
-        </div>
-    `;
-    
-    return card;
-}
-
-// ============================================
-// TOGGLE FAVORITO
-// ============================================
-function toggleFavorite(familyId) {
-    const index = favorites.indexOf(familyId);
-    
-    if (index === -1) {
-        favorites.push(familyId);
-        showNotification('Added to favorites! ❤️');
-    } else {
-        favorites.splice(index, 1);
-        showNotification('Removed from favorites');
-    }
-    
-    // Re-renderizar
-    renderFamilies(currentFilter);
-}
-
-// ============================================
-// DESCARGAR FAMILIA
-// ============================================
-function downloadFamily(familyId) {
-    const family = mockFamilies.find(f => f.id === familyId);
-    
-    if (!family) return;
-    
-    // Verificar límite de descargas
-    if (downloadsRemaining === 0 && !family.isPremium) {
-        showNotification('Daily limit reached! Upgrade to Premium for unlimited downloads.', 'error');
-        // Abrir modal de pricing
-        document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
-        return;
-    }
-    
-    // Simular descarga
-    downloadsRemaining--;
-    updateDownloadCounter();
-    
-    showNotification(`Downloading "${family.name}"... ✅`);
-    
-    // Re-renderizar para actualizar botones
-    renderFamilies(currentFilter);
+    // Descargas
+    document.querySelectorAll('.family-download-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const familyId = parseInt(btn.dataset.familyId);
+            const result = handleDownload(familyId, mockFamilies, downloadsRemaining);
+            
+            if (result.success) {
+                downloadsRemaining = result.remaining;
+                updateDownloadCounter();
+                renderFamilies(currentFilter);
+            }
+        });
+    });
 }
 
 // ============================================
@@ -225,17 +185,12 @@ function setupFilters() {
     
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remover active de todos
             filterButtons.forEach(b => b.classList.remove('active'));
-            
-            // Agregar active al clickeado
             btn.classList.add('active');
             
-            // Obtener filtro
             const filter = btn.dataset.filter;
             currentFilter = filter;
             
-            // Renderizar
             renderFamilies(filter);
         });
     });
@@ -249,7 +204,6 @@ function setupSearch() {
     
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
-        
         const cards = document.querySelectorAll('.family-card');
         
         cards.forEach(card => {
@@ -273,31 +227,27 @@ function setupModal() {
     const btnRegister = document.getElementById('btnRegister');
     const closeModal = document.getElementById('closeModal');
     
-    // Abrir modal
-    btnLogin.addEventListener('click', () => {
+    btnLogin?.addEventListener('click', () => {
         modal.classList.add('active');
         updateModalContent('login');
     });
     
-    btnRegister.addEventListener('click', () => {
+    btnRegister?.addEventListener('click', () => {
         modal.classList.add('active');
         updateModalContent('register');
     });
     
-    // Cerrar modal
-    closeModal.addEventListener('click', () => {
+    closeModal?.addEventListener('click', () => {
         modal.classList.remove('active');
     });
     
-    // Cerrar al hacer clic fuera
-    modal.addEventListener('click', (e) => {
+    modal?.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.classList.remove('active');
         }
     });
     
-    // Switch entre login y register
-    document.getElementById('switchToRegister').addEventListener('click', (e) => {
+    document.getElementById('switchToRegister')?.addEventListener('click', (e) => {
         e.preventDefault();
         updateModalContent('register');
     });
@@ -318,71 +268,12 @@ function updateModalContent(type) {
         footer.innerHTML = `Already have an account? <a href="#" id="switchToLogin">Sign in</a>`;
     }
     
-    // Re-attach event listeners
     const switchLink = footer.querySelector('a');
-    switchLink.addEventListener('click', (e) => {
+    switchLink?.addEventListener('click', (e) => {
         e.preventDefault();
         updateModalContent(type === 'login' ? 'register' : 'login');
     });
 }
-
-// ============================================
-// SISTEMA DE NOTIFICACIONES
-// ============================================
-function showNotification(message, type = 'success') {
-    // Crear elemento de notificación
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#20CF71' : '#FF4757'};
-        color: white;
-        padding: 16px 24px;
-        border-radius: 12px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        z-index: 3000;
-        font-weight: 600;
-        animation: slideIn 0.3s ease;
-    `;
-    notification.textContent = message;
-    
-    // Agregar al body
-    document.body.appendChild(notification);
-    
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
-}
-
-// Agregar animaciones CSS
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
 
 // ============================================
 // SMOOTH SCROLL PARA NAVEGACIÓN
@@ -393,10 +284,7 @@ function setupSmoothScroll() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                smoothScrollTo(target);
             }
         });
     });
@@ -412,10 +300,8 @@ function setupCategoryCards() {
         card.addEventListener('click', () => {
             const category = card.dataset.category;
             
-            // Scroll a la sección de familias
-            document.getElementById('explore').scrollIntoView({ behavior: 'smooth' });
+            smoothScrollTo('#explore');
             
-            // Activar el filtro correspondiente
             setTimeout(() => {
                 const filterBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
                 if (filterBtn) {
@@ -433,10 +319,11 @@ function setupHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
+    if (!hamburger || !navMenu) return;
+    
     hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         
-        // Cambiar icono
         const icon = hamburger.querySelector('i');
         if (navMenu.classList.contains('active')) {
             icon.classList.remove('fa-bars');
@@ -449,41 +336,20 @@ function setupHamburgerMenu() {
 }
 
 // ============================================
-// UTILIDADES
-// ============================================
-function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-// ============================================
 // INICIALIZACIÓN
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Boracity website loaded!');
     
-    // Renderizar familias iniciales
     renderFamilies();
-    
-    // Configurar filtros
     setupFilters();
-    
-    // Configurar búsqueda
     setupSearch();
-    
-    // Configurar modal
     setupModal();
-    
-    // Configurar smooth scroll
     setupSmoothScroll();
-    
-    // Configurar tarjetas de categorías
     setupCategoryCards();
-    
-    // Configurar menú hamburguesa
     setupHamburgerMenu();
     
-    // Mostrar mensaje de bienvenida
     setTimeout(() => {
-        showNotification('Welcome to Boracity! 🎉');
+        showNotification(MESSAGES.INFO.WELCOME);
     }, 1000);
 });
