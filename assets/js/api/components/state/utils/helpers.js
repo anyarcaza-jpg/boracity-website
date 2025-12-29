@@ -35,7 +35,7 @@ export const debounce = (func, wait = 300) => {
  */
 export const showNotification = (message, type = 'success') => {
   const colors = {
-    success: '#20CF71',
+    success: '#FF4500',
     error: '#FF4757',
   };
 

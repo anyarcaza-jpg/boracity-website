@@ -9,8 +9,8 @@
 
 :root {
     /* Colors */
-    --primary: #20CF71;
-    --primary-dark: #1AB763;
+    --primary: #FF4500;
+    --primary-dark: #E63E00;
     --secondary: #212121;
     --text-primary: #212121;
     --text-secondary: #757575;
@@ -144,7 +144,7 @@ body {
    HERO SECTION
    ============================================ */
 .hero {
-    background: linear-gradient(135deg, #20CF71 0%, #1AB763 100%);
+    background: linear-gradient(135deg, #FF4500 0%, #E63E00 100%);
     padding: 100px 20px;
     color: var(--white);
     text-align: center;
@@ -279,7 +279,7 @@ body {
 .category-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #20CF71 0%, #1AB763 100%);
+    background: linear-gradient(135deg, #FF4500 0%, #E63E00 100%);
     border-radius: 20px;
     display: flex;
     align-items: center;

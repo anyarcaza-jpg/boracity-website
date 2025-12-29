@@ -1,25 +1,6 @@
 /* ============================================
    VARIABLES Y RESET
    ============================================ */
-:root {
-    /* Colors */
-    --primary: #20CF71;
-    --primary-dark: #1AB763;
-    --secondary: #212121;
-    --text-primary: #212121;
-    --text-secondary: #757575;
-    --background: #F5F5F5;
-    --white: #FFFFFF;
-    --border: #E0E0E0;
-    
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.15);
-    
-    /* Transitions */
-    --transition: all 0.3s ease;
-}
 
 * {
     margin: 0;
