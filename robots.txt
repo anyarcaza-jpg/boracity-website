@@ -1,0 +1,13 @@
+# Boracity.com - Robots.txt
+# Updated: December 2024
+
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+Disallow: /assets/css/
+Disallow: /*.json$
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+
+Sitemap: https://www.boracity.com/sitemap.xml
