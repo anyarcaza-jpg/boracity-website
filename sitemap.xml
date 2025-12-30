@@ -2,7 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     
-    <!-- Homepage -->
+    <!-- ========================================
+         HOMEPAGE - Máxima Prioridad
+         ======================================== -->
     <url>
         <loc>https://www.boracity.com/</loc>
         <lastmod>2024-12-29</lastmod>
@@ -10,7 +12,9 @@
         <priority>1.0</priority>
     </url>
     
-    <!-- Categories Section -->
+    <!-- ========================================
+         SECCIONES PRINCIPALES
+         ======================================== -->
     <url>
         <loc>https://www.boracity.com/#categories</loc>
         <lastmod>2024-12-29</lastmod>
@@ -18,7 +22,6 @@
         <priority>0.9</priority>
     </url>
     
-    <!-- Explore/Families Section -->
     <url>
         <loc>https://www.boracity.com/#explore</loc>
         <lastmod>2024-12-29</lastmod>
@@ -26,7 +29,6 @@
         <priority>0.9</priority>
     </url>
     
-    <!-- Pricing Section -->
     <url>
         <loc>https://www.boracity.com/#pricing</loc>
         <lastmod>2024-12-29</lastmod>
@@ -34,69 +36,132 @@
         <priority>0.8</priority>
     </url>
     
-    <!-- Category: Revit Families -->
+    <!-- ========================================
+         PRODUCTOS - LÍNEAS PRINCIPALES
+         ======================================== -->
+    
+    <!-- Revit Families - Producto Activo -->
     <url>
-        <loc>https://www.boracity.com/categories/revit-families</loc>
+        <loc>https://www.boracity.com/products/revit-families</loc>
         <lastmod>2024-12-29</lastmod>
         <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+    
+    <!-- SketchUp Models - Coming Soon -->
+    <url>
+        <loc>https://www.boracity.com/products/sketchup-models</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
-    <!-- Category: SketchUp Models -->
+    <!-- D5 Render Assets - Coming Soon -->
     <url>
-        <loc>https://www.boracity.com/categories/sketchup-models</loc>
+        <loc>https://www.boracity.com/products/d5-render-assets</loc>
         <lastmod>2024-12-29</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
-    <!-- Category: D5 Render Assets -->
+    <!-- Textures - Coming Soon -->
     <url>
-        <loc>https://www.boracity.com/categories/d5-render-assets</loc>
+        <loc>https://www.boracity.com/products/textures</loc>
         <lastmod>2024-12-29</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     
-    <!-- Category: Textures -->
-    <url>
-        <loc>https://www.boracity.com/categories/textures</loc>
-        <lastmod>2024-12-29</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
+    <!-- ========================================
+         CATEGORÍAS - REVIT FAMILIES
+         ======================================== -->
     
-    <!-- Subcategory: Furniture -->
+    <!-- Furniture Category -->
     <url>
         <loc>https://www.boracity.com/categories/furniture</loc>
         <lastmod>2024-12-29</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.85</priority>
     </url>
     
-    <!-- Subcategory: Doors -->
+    <!-- Doors Category -->
     <url>
         <loc>https://www.boracity.com/categories/doors</loc>
         <lastmod>2024-12-29</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.85</priority>
     </url>
     
-    <!-- Subcategory: Windows -->
+    <!-- Windows Category -->
     <url>
         <loc>https://www.boracity.com/categories/windows</loc>
         <lastmod>2024-12-29</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.85</priority>
     </url>
     
-    <!-- Subcategory: Lighting -->
+    <!-- Lighting Category -->
     <url>
         <loc>https://www.boracity.com/categories/lighting</loc>
         <lastmod>2024-12-29</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <priority>0.85</priority>
     </url>
+    
+    <!-- Plumbing Category -->
+    <url>
+        <loc>https://www.boracity.com/categories/plumbing</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    
+    <!-- Equipment Category -->
+    <url>
+        <loc>https://www.boracity.com/categories/equipment</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    
+    <!-- Structure Category -->
+    <url>
+        <loc>https://www.boracity.com/categories/structure</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    
+    <!-- Finishes Category -->
+    <url>
+        <loc>https://www.boracity.com/categories/finishes</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    
+    <!-- ========================================
+         PÁGINAS DE SOPORTE (Futuras)
+         ======================================== -->
+    
+    <!-- Blog (cuando lo crees) -->
+    <!--
+    <url>
+        <loc>https://www.boracity.com/blog</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    -->
+    
+    <!-- Support (cuando lo crees) -->
+    <!--
+    <url>
+        <loc>https://www.boracity.com/support</loc>
+        <lastmod>2024-12-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    -->
 
 </urlset>
-```

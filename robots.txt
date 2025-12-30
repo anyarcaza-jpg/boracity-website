@@ -1,13 +1,84 @@
-# Boracity.com - Robots.txt
-# Updated: December 2024
+# ============================================
+# BORACITY.COM - ROBOTS.TXT
+# Multi-Product Architecture Resource Platform
+# Updated: December 29, 2024
+# ============================================
 
-User-agent: *
+# ============================================
+# GOOGLE BOT (Más importante)
+# ============================================
+User-agent: Googlebot
 Allow: /
+Allow: /products/
+Allow: /categories/
 Disallow: /assets/js/
 Disallow: /assets/css/
 Disallow: /*.json$
+Crawl-delay: 0
 
+# ============================================
+# GOOGLE BOT IMAGES (Para imágenes)
+# ============================================
 User-agent: Googlebot-Image
 Allow: /assets/images/
+Allow: /products/
+Disallow: /assets/css/
+Disallow: /assets/js/
 
+# ============================================
+# BING BOT
+# ============================================
+User-agent: Bingbot
+Allow: /
+Allow: /products/
+Allow: /categories/
+Disallow: /assets/js/
+Disallow: /assets/css/
+Crawl-delay: 1
+
+# ============================================
+# TODOS LOS DEMÁS BOTS
+# ============================================
+User-agent: *
+Allow: /
+Allow: /products/
+Allow: /categories/
+
+# Bloquear archivos técnicos
+Disallow: /assets/js/
+Disallow: /assets/css/
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.vscode/
+
+# Permitir imágenes
+Allow: /assets/images/
+
+# ============================================
+# BOTS MALICIOSOS - BLOQUEAR
+# ============================================
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# ============================================
+# SITEMAP
+# ============================================
 Sitemap: https://www.boracity.com/sitemap.xml
+
+# ============================================
+# NOTAS PARA MANTENIMIENTO
+# ============================================
+# - Actualizar fecha cuando hagas cambios
+# - Cuando lances productos, quita Disallow si es necesario
+# - Cuando tengas API, agrégala a Disallow
+# - Crawl-delay: 0 = sin límite (Google lo ignora de todos modos)
