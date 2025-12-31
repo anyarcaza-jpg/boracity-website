@@ -1,0 +1,118 @@
+/* ============================================
+   CSS RESET & NORMALIZE
+   ============================================
+   
+   Resetea estilos del navegador para consistencia
+   cross-browser. Basado en modern-normalize.
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ========================================
+   DOCUMENT
+   ======================================== */
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* ========================================
+   SECTIONS
+   ======================================== */
+
+body {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    background: var(--background);
+    line-height: var(--leading-normal);
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========================================
+   TEXT
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+}
+
+p {
+    margin: 0;
+}
+
+/* ========================================
+   LISTS
+   ======================================== */
+
+ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+button {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   IMAGES
+   ======================================== */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

@@ -1,0 +1,102 @@
+/* ============================================
+   NAVBAR - Navigation Component
+   ============================================ */
+
+.navbar {
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-lg) 0;
+}
+
+/* ========================================
+   LOGO
+   ======================================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-extrabold);
+    color: var(--primary);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+.logo i {
+    font-size: 28px;
+}
+
+/* ========================================
+   NAVIGATION MENU
+   ======================================== */
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: var(--font-medium);
+    transition: var(--transition-base);
+}
+
+.nav-menu a:hover {
+    color: var(--primary);
+}
+
+/* ========================================
+   NAV BUTTONS
+   ======================================== */
+
+.nav-buttons {
+    display: flex;
+    gap: var(--space-md);
+}
+
+/* ========================================
+   HAMBURGER MENU (Mobile)
+   ======================================== */
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: var(--text-2xl);
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: var(--transition-base);
+}
+
+.hamburger:hover {
+    color: var(--primary);
+}
+
+/* Mobile menu active state */
+.nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+}
